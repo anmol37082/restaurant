@@ -8,7 +8,7 @@ const AdminSidebar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
-    navigate('/admin'); // back to login
+    navigate('/admin-login'); // Redirect to login page
   };
 
   return (
@@ -21,7 +21,7 @@ const AdminSidebar = () => {
         <ul className="nav flex-column">
           <li className="nav-item mb-2">
             <NavLink
-              to="/adminpanel/add-menu"
+              to="/add-menu"
               className={({ isActive }) =>
                 `nav-link ${isActive ? 'active text-warning' : 'text-white'}`
               }
@@ -31,7 +31,7 @@ const AdminSidebar = () => {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/adminpanel/orders"
+              to="/admin/orders"
               className={({ isActive }) =>
                 `nav-link ${isActive ? 'active text-warning' : 'text-white'}`
               }
