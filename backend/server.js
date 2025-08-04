@@ -8,7 +8,16 @@ dotenv.config();
 
 const app = express(); // ✅ This must come BEFORE any `app.use(...)`
 
-app.use(cors());
+const cors = require('cors');
+
+// Replace with your actual frontend URL on Render
+const allowedOrigins = ['https://restaurant-frontend-oxvo.onrender.com'];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
