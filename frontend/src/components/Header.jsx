@@ -1,7 +1,7 @@
-import { 
-  FaUtensils, FaBars, FaTimes, FaHome, 
-  FaHamburger, FaInfoCircle, FaClipboardList, 
-  FaUser, FaUserShield // 👈 Added Admin icon
+import {
+  FaUtensils, FaBars, FaTimes, FaHome,
+  FaHamburger, FaInfoCircle, FaClipboardList,
+  FaUser, FaUserShield
 } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
@@ -39,8 +39,8 @@ const Header = ({ subtitle = '' }) => {
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
-        {/* Logo/Brand */}
-        <div 
+        {/* Logo */}
+        <div
           className={styles.logoContainer}
           onClick={() => handleNavigation('/')}
           role="button"
@@ -53,7 +53,7 @@ const Header = ({ subtitle = '' }) => {
         {/* Desktop Navigation */}
         <nav className={styles.desktopNav}>
           {navItems.map((item) => (
-            <button 
+            <button
               key={item.path}
               className={styles.navButton}
               onClick={() => handleNavigation(item.path)}
@@ -62,8 +62,8 @@ const Header = ({ subtitle = '' }) => {
               <span>{item.label}</span>
             </button>
           ))}
-          
-          {/* Profile Icon */}
+
+          {/* Profile Button */}
           <button
             className={styles.profileButton}
             onClick={() => handleNavigation('/profile')}
@@ -72,7 +72,7 @@ const Header = ({ subtitle = '' }) => {
             <FaUser className={styles.profileIcon} />
           </button>
 
-          {/* ✅ Admin Button */}
+          {/* Admin Button */}
           <button
             className={styles.profileButton}
             onClick={() => handleNavigation('/admin')}
@@ -82,8 +82,8 @@ const Header = ({ subtitle = '' }) => {
           </button>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button 
+        {/* Mobile Menu Toggle */}
+        <button
           className={styles.mobileMenuButton}
           onClick={toggleMenu}
           aria-label="Toggle menu"
@@ -97,12 +97,12 @@ const Header = ({ subtitle = '' }) => {
         </button>
 
         {/* Mobile Navigation */}
-        <div 
+        <div
           ref={menuRef}
           className={`${styles.mobileNav} ${isMenuOpen ? styles.mobileNavOpen : ''}`}
         >
           {navItems.map((item) => (
-            <button 
+            <button
               key={item.path}
               className={styles.mobileNavButton}
               onClick={() => handleNavigation(item.path)}
@@ -112,8 +112,8 @@ const Header = ({ subtitle = '' }) => {
             </button>
           ))}
 
-          {/* Profile in Mobile Menu */}
-          <button 
+          {/* Profile (Mobile) */}
+          <button
             className={styles.mobileNavButton}
             onClick={() => handleNavigation('/profile')}
           >
@@ -121,20 +121,18 @@ const Header = ({ subtitle = '' }) => {
             <span>Profile</span>
           </button>
 
-          {/* ✅ Admin in Mobile Menu */}
-        // Admin button in Header.jsx
-<button
-  className={styles.profileButton}
-  onClick={() => handleNavigation('/admin')}
-  aria-label="Admin Login"
->
-  <FaUserShield className={styles.profileIcon} />
-</button>
-
+          {/* Admin (Mobile) */}
+          <button
+            className={styles.mobileNavButton}
+            onClick={() => handleNavigation('/admin')}
+          >
+            <FaUserShield />
+            <span>Admin</span>
+          </button>
         </div>
       </div>
 
-      {/* Subtitle (optional) */}
+      {/* Subtitle (Optional) */}
       {subtitle && (
         <div className={styles.subtitleContainer}>
           <h2 className={styles.subtitleText}>{subtitle}</h2>
