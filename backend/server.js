@@ -19,10 +19,8 @@ app.use('/api/admin', require('./routes/adminAuth')); // ✅ Moved to the correc
 app.use('/api/auth', require('./routes/auth'));
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URI)
+
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
