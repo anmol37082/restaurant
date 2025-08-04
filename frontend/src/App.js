@@ -28,9 +28,11 @@ function App() {
         <Route path="/my-orders" element={<MyOrders />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/add-menu" element={<AddMenu />} />
-        <Route path="/admin/orders" element={<OrderList />} />
-       
+        <Route path="/addmenu" element={<AddMenu />} />
+        <Route path="/OrderList" element={<OrderList />} />
+        <Route path="/AdminSidebar" element={<AdminSidebar />} />
+
+
       </Routes>
     </Router>
   );
