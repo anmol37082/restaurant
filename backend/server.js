@@ -1,14 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const cors = require('cors');
+const cors = require('cors'); // ✅ Only once
 const path = require('path');
 
 dotenv.config();
 
 const app = express(); // ✅ This must come BEFORE any `app.use(...)`
-
-const cors = require('cors');
 
 // Replace with your actual frontend URL on Render
 const allowedOrigins = ['https://restaurant-frontend-oxvo.onrender.com'];
@@ -24,14 +22,13 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // API Routes
 app.use('/api/dishes', require('./routes/dishes'));
 app.use('/api/orders', require('./routes/orders'));
-app.use('/api/admin', require('./routes/adminAuth')); // ✅ Moved to the correct place
+app.use('/api/admin', require('./routes/adminAuth'));
 app.use('/api/auth', require('./routes/auth'));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
 // Start server
 const PORT = process.env.PORT || 5000;
