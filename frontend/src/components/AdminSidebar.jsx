@@ -21,7 +21,7 @@ const AdminSidebar = () => {
         <ul className="nav flex-column">
           <li className="nav-item mb-2">
             <NavLink
-              to="addmenu"
+              to="/add-menu"
               className={({ isActive }) =>
                 `nav-link ${isActive ? 'active text-warning' : 'text-white'}`
               }
