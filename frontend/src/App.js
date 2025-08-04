@@ -1,3 +1,4 @@
+// src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -20,82 +21,19 @@ import Header from './components/Header';
 function App() {
   return (
     <Router>
+      <Header />
       <Routes>
-        {/* Public Routes with Header */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Header />
-              <Home />
-            </>
-          }
-        />
-        <Route
-          path="/menu"
-          element={
-            <>
-              <Header />
-              <Menu />
-            </>
-          }
-        />
-        <Route
-          path="/order/:id"
-          element={
-            <>
-              <Header />
-              <OrderPage />
-            </>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <>
-              <Header />
-              <About />
-            </>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <>
-              <Header />
-              <UserLogin />
-            </>
-          }
-        />
-        <Route
-          path="/my-orders"
-          element={
-            <>
-              <Header />
-              <MyOrders />
-            </>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <>
-              <Header />
-              <ProfilePage />
-            </>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <>
-              <Header />
-              <AdminLogin />
-            </>
-          }
-        />
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/order/:id" element={<OrderPage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<UserLogin />} />
+        <Route path="/my-orders" element={<MyOrders />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/admin" element={<AdminLogin />} />
 
-        {/* Admin Panel with Sidebar (NO public Header) */}
+        {/* Admin Routes under layout */}
         <Route
           path="/adminpanel"
           element={
