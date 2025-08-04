@@ -76,17 +76,21 @@ const Menu = () => {
                       alt={dish.name}
                       loading="lazy"
                     />
-                    <span className={styles.priceBadge}>₹{dish.price}</span>
+                    <span className={styles.priceBadge}>
+                      ₹{dish.price.toLocaleString('en-IN')}
+                    </span>
                   </div>
                   <div className={styles.cardBody}>
                     <h3 className={styles.cardTitle}>{dish.name}</h3>
-                    <p className={styles.cardText}>{dish.description}</p>
-                    <Link 
-                      to={`/order/${dish._id}`} 
-                      className={styles.orderBtn}
-                    >
-                      Order Now
-                    </Link>
+                    <p className={styles.cardText}>{dish.description || 'Delicious chef special preparation'}</p>
+                    <div className={styles.cardFooter}>
+                      <Link 
+                        to={`/order/${dish._id}`} 
+                        className={styles.orderBtn}
+                      >
+                        Order Now
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}
