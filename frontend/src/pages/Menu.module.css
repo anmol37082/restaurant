@@ -1,144 +1,166 @@
 /* Menu.module.css */
 
 /* Base Styles */
+.menuPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .menuContainer {
   padding: 3rem 1rem;
   max-width: 1400px;
   margin: 0 auto;
-  min-height: 100vh;
+  width: 100%;
 }
 
-.heading {
+/* Hero Section */
+.heroSection {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+              url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') center/cover;
+  color: white;
+  padding: 8rem 2rem;
   text-align: center;
-  margin-bottom: 3rem;
-  font-family: 'Playfair Display', serif;
-  color: #2c3e50;
-  font-size: 2.8rem;
-  font-weight: 700;
   position: relative;
 }
 
-.heading::after {
-  content: '';
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 4px;
-  background: linear-gradient(90deg, #e67e22, #d35400);
-  border-radius: 2px;
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Menu Grid Layout */
+.heroSection h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.heroSection p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  opacity: 0.9;
+}
+
+/* Menu Grid */
 .menuGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2.5rem;
-  padding: 0 1rem;
+  padding: 2rem 0;
 }
 
-/* Card Styles */
-.card {
-  background: #fff;
-  border-radius: 16px;
+/* Menu Card - Matching Home Style */
+.menuCard {
+  transition: 
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.3s ease-out;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: none;
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform-style: preserve-3d;
+}
+
+.menuCard:hover {
+  transform: 
+    translateY(-8px)
+    rotateX(2deg)
+    rotateY(2deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cardImgContainer {
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-.imageContainer {
-  width: 100%;
-  height: 240px;
   overflow: hidden;
-  position: relative;
+  height: 220px;
+  flex-shrink: 0;
+  transform: translateZ(30px);
 }
 
-.image {
+.cardImgContainer img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s ease;
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.card:hover .image {
-  transform: scale(1.1);
+.menuCard:hover .cardImgContainer img {
+  transform: scale(1.1) rotate(1deg);
 }
 
-/* Card Content */
-.cardContent {
-  padding: 1.8rem;
+.priceBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  color: white;
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform: translateZ(40px);
+  transition: all 0.3s ease;
+}
+
+.menuCard:hover .priceBadge {
+  transform: translateZ(40px) scale(1.05);
+}
+
+.cardBody {
+  padding: 1.75rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-.name {
+.cardTitle {
+  font-family: 'Dancing Script', cursive;
   font-size: 1.5rem;
-  margin-bottom: 0.8rem;
-  color: #2c3e50;
   font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
-  line-height: 1.3;
+  margin-bottom: 0.75rem;
+  color: #333;
+  transition: color 0.3s ease;
 }
 
-.description {
-  color: #7f8c8d;
-  font-size: 1rem;
-  line-height: 1.6;
+.menuCard:hover .cardTitle {
+  color: #e67e22;
+}
+
+.cardText {
+  font-size: 0.95rem;
+  color: #666;
   margin-bottom: 1.5rem;
   flex-grow: 1;
+  line-height: 1.6;
 }
 
-.price {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: #e67e22;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.price::before {
-  content: '₹';
-  font-size: 1.2rem;
-}
-
-/* Order Button */
 .orderBtn {
-  display: block;
-  text-align: center;
   background: linear-gradient(135deg, #e67e22, #d35400);
-  color: white;
-  padding: 0.9rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  transition: all 0.3s ease;
   border: none;
-  cursor: pointer;
-  font-family: 'Montserrat', sans-serif;
+  color: white;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 8px rgba(230, 126, 34, 0.3);
+  width: 100%;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  font-size: 0.95rem;
-  margin-top: auto;
+  font-size: 0.9rem;
   position: relative;
   overflow: hidden;
-  z-index: 1;
+  text-decoration: none;
+  text-align: center;
 }
 
-.orderBtn::before {
+.orderBtn::after {
   content: '';
   position: absolute;
   top: 0;
@@ -146,123 +168,81 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: 0.5s;
-  z-index: -1;
+  transition: left 0.7s ease;
 }
 
 .orderBtn:hover {
   background: linear-gradient(135deg, #d35400, #e67e22);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(230, 126, 34, 0.4);
+  box-shadow: 0 6px 12px rgba(230, 126, 34, 0.4);
 }
 
-.orderBtn:hover::before {
+.orderBtn:hover::after {
   left: 100%;
 }
 
-/* Loading State */
-.loadingContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 300px;
-}
-
-.loadingSpinner {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #e67e22;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Error State */
-.errorContainer {
-  text-align: center;
-  padding: 2rem;
-  background: #f8d7da;
-  border-radius: 8px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.errorMessage {
-  color: #721c24;
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-}
-
-.retryButton {
-  background: #e67e22;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.8rem;
-  border-radius: 6px;
+.sectionTitle {
+  position: relative;
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s;
+  color: #333;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
 }
 
-.retryButton:hover {
-  background: #d35400;
+.sectionTitleDecoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 4px;
+  background: #e67e22;
+  border-radius: 2px;
+  transition: width 0.3s ease-out;
+}
+
+.sectionTitle:hover .sectionTitleDecoration {
+  width: 100%;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 1200px) {
   .menuGrid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
 }
 
 @media (max-width: 992px) {
-  .menuContainer {
-    padding: 2.5rem 1rem;
-  }
-  
-  .heading {
-    font-size: 2.5rem;
-    margin-bottom: 2.5rem;
+  .heroSection {
+    padding: 6rem 2rem;
   }
   
   .menuGrid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 2rem;
-  }
-  
-  .imageContainer {
-    height: 220px;
   }
 }
 
 @media (max-width: 768px) {
-  .heading {
-    font-size: 2.2rem;
+  .heroSection {
+    padding: 5rem 1.5rem;
   }
   
   .menuGrid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1.8rem;
-    padding: 0;
   }
   
-  .cardContent {
-    padding: 1.5rem;
+  .cardImgContainer {
+    height: 200px;
   }
 }
 
 @media (max-width: 576px) {
-  .menuContainer {
-    padding: 2rem 1rem;
-  }
-  
-  .heading {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+  .heroSection {
+    padding: 4rem 1rem;
   }
   
   .menuGrid {
@@ -270,22 +250,11 @@
     gap: 1.5rem;
   }
   
-  .imageContainer {
-    height: 200px;
+  .cardImgContainer {
+    height: 180px;
   }
   
-  .name {
-    font-size: 1.4rem;
+  .cardBody {
+    padding: 1.5rem;
   }
-  
-  .orderBtn {
-    padding: 0.8rem;
-  }
-}
-
-/* Accessibility Focus Styles */
-.orderBtn:focus-visible,
-.retryButton:focus-visible {
-  outline: 3px solid #e67e22;
-  outline-offset: 3px;
 }
