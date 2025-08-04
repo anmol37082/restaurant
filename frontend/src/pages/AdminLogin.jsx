@@ -17,7 +17,7 @@ const AdminLogin = () => {
       });
       if (res.data.success) {
         localStorage.setItem('adminToken', res.data.token);
-        navigate('/admin');
+        navigate('/AdminSidebar'); // Redirect to admin dashboard
       }
     } catch (err) {
       alert('Login failed. Check credentials.');
