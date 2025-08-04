@@ -1,4 +1,3 @@
-// src/pages/Menu.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Menu.module.css';
@@ -27,17 +26,12 @@ const Menu = () => {
         <h2 className={styles.heading}>Our Delicious Menu</h2>
         <div className={styles.menuGrid}>
           {dishes.map(dish => (
-            <div key={dish._id} className={styles.menuCard}>
-              <img
-                loading="lazy"
-                src={`${process.env.REACT_APP_API_URL}/uploads/${dish.image}`}
-                alt={dish.name}
-                className={styles.menuImage}
-              />
-              <h3 className={styles.menuName}>{dish.name}</h3>
-              <p className={styles.menuDescription}>{dish.description}</p>
-              <p className={styles.menuPrice}>₹{dish.price}</p>
-              <Link to={`/order/${dish._id}`} className={styles.orderButton}>Order Now</Link>
+            <div key={dish._id} className={styles.card}>
+              <img src={`${process.env.REACT_APP_API_URL}/uploads/${dish.image}`} alt={dish.name} className={styles.image} />
+              <h3 className={styles.name}>{dish.name}</h3>
+              <p className={styles.description}>{dish.description}</p>
+              <p className={styles.price}>₹{dish.price}</p>
+              <Link to={`/order/${dish._id}`} className={styles.orderBtn}>Order Now</Link>
             </div>
           ))}
         </div>
