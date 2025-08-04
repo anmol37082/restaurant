@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaEnvelope, FaKey, FaSignInAlt, FaCheck } from 'react-icons/fa';
-import styles from './UserLogin.module.css'; // Create this CSS module
+import styles from './UserLogin.module.css';
 
 const UserLogin = () => {
   const [email, setEmail] = useState('');
@@ -9,9 +9,11 @@ const UserLogin = () => {
   const [otp, setOtp] = useState('');
   const [message, setMessage] = useState('');
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const sendOTP = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/send-otp', { email });
+      const res = await axios.post(`${API_URL}/api/auth/send-otp`, { email });
       setOtpSent(true);
       setMessage(res.data.message);
     } catch (err) {
@@ -21,7 +23,7 @@ const UserLogin = () => {
 
   const verifyOTP = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/verify-otp', { email, otp });
+      const res = await axios.post(`${API_URL}/api/auth/verify-otp`, { email, otp });
       localStorage.setItem('userId', res.data.userId);
       localStorage.setItem('userEmail', email);
       setMessage('✅ Login successful!');

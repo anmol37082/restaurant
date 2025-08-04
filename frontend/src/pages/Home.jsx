@@ -15,11 +15,13 @@ const Home = () => {
   const sliderRef = useRef(null);
   const navigate = useNavigate();
 
+  const API = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
-    axios.get('http://localhost:5000/api/dishes').then(res => {
-      setDishes(res.data.slice(0, 7)); // Get 7 dishes for the slider
+    axios.get(`${API}/api/dishes`).then(res => {
+      setDishes(res.data.slice(0, 7));
     });
-  }, []);
+  }, [API]);
 
   const onMouseDown = (e) => {
     setIsDragging(true);
@@ -27,7 +29,7 @@ const Home = () => {
     setScrollLeft(sliderRef.current.scrollLeft);
     setStartTime(performance.now());
     sliderRef.current.style.cursor = 'grabbing';
-    sliderRef.current.style.scrollBehavior = 'auto'; // Disable smooth scroll during drag
+    sliderRef.current.style.scrollBehavior = 'auto';
   };
 
   const onMouseLeave = () => {
@@ -40,59 +42,58 @@ const Home = () => {
     setIsDragging(false);
     sliderRef.current.style.cursor = 'grab';
     sliderRef.current.style.scrollBehavior = 'smooth';
-    
-    // Calculate momentum for smoother stopping
+
     const endTime = performance.now();
     const timeDiff = endTime - startTime;
-    if (timeDiff < 100) { // If it was a quick swipe
+    if (timeDiff < 100) {
       const velocity = (scrollLeft - sliderRef.current.scrollLeft) / timeDiff;
-      const momentum = velocity * 100; // Adjust this multiplier for more/less momentum
-      
-      // Apply momentum scroll
+      const momentum = velocity * 100;
       const targetScroll = sliderRef.current.scrollLeft - momentum;
-      smoothScrollTo(sliderRef.current, targetScroll, 1000); // 1000ms duration
+      smoothScrollTo(sliderRef.current, targetScroll, 1000);
     }
-  };
-
-  const smoothScrollTo = (element, target, duration) => {
-    const start = element.scrollLeft;
-    const change = target - start;
-    const startTime = performance.now();
-    
-    const animateScroll = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easeProgress = easeOutQuad(progress);
-      element.scrollLeft = start + change * easeProgress;
-      
-      if (progress < 1) {
-        requestAnimationFrame(animateScroll);
-      }
-    };
-    
-    requestAnimationFrame(animateScroll);
-  };
-
-  const easeOutQuad = (t) => {
-    return t * (2 - t);
   };
 
   const onMouseMove = (e) => {
     if (!isDragging) return;
     e.preventDefault();
     const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5; // Reduced multiplier for slower dragging
+    const walk = (x - startX) * 1.5;
     sliderRef.current.scrollLeft = scrollLeft - walk;
   };
 
+  const smoothScrollTo = (element, target, duration) => {
+    const start = element.scrollLeft;
+    const change = target - start;
+    const startTime = performance.now();
+
+    const animateScroll = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeProgress = easeOutQuad(progress);
+      element.scrollLeft = start + change * easeProgress;
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
+  };
+
+  const easeOutQuad = (t) => t * (2 - t);
+
   return (
     <div className={styles.menuPage}>
-      <Header/>
-      
+      <Header />
+
       {/* Hero Section */}
-      <section className={`${styles.heroSection} py-5`} style={{ 
-        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1517248135467-4c7edcad34c4)'
-      }}>
+      <section
+        className={`${styles.heroSection} py-5`}
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1517248135467-4c7edcad34c4)'
+        }}
+      >
         <div className="container text-center text-white">
           <h1 className="display-4 fw-bold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
             Authentic Indian Cuisine
@@ -103,32 +104,36 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Main Content - Full Width */}
+      {/* Main Content */}
       <div className="container-fluid px-0 my-5">
-        <div className="card rounded-0 border-0 shadow-sm" style={{ 
-          backgroundColor: '#fff',
-          borderLeft: '5px solid #e67e22',
-          borderRight: '5px solid #e67e22'
-        }}>
+        <div
+          className="card rounded-0 border-0 shadow-sm"
+          style={{
+            backgroundColor: '#fff',
+            borderLeft: '5px solid #e67e22',
+            borderRight: '5px solid #e67e22'
+          }}
+        >
           <div className="container py-4">
-            {/* Title and View All Button */}
             <div className="d-flex justify-content-between align-items-center mb-4 px-3">
-              <h2 className={`${styles.sectionTitle} position-relative d-inline-block m-0`} 
-                  style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h2
+                className={`${styles.sectionTitle} position-relative d-inline-block m-0`}
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
                 Our Special Dishes
                 <span className={styles.sectionTitleDecoration}></span>
               </h2>
-             <button 
-  className={`${styles.viewFullMenuBtn} btn d-flex align-items-center`}
-  onClick={() => navigate('/menu')}
->
-  View Full Menu <FaArrowRight className="ms-2" />
-</button>
+              <button
+                className={`${styles.viewFullMenuBtn} btn d-flex align-items-center`}
+                onClick={() => navigate('/menu')}
+              >
+                View Full Menu <FaArrowRight className="ms-2" />
+              </button>
             </div>
           </div>
 
-          {/* Full Width Slider Container */}
-          <div 
+          {/* Slider */}
+          <div
             className={`${styles.sliderContainer}`}
             ref={sliderRef}
             onMouseDown={onMouseDown}
@@ -136,14 +141,13 @@ const Home = () => {
             onMouseUp={onMouseUp}
             onMouseMove={onMouseMove}
           >
-            {/* Dishes Slider */}
             <div className={`${styles.sliderTrack} d-flex`}>
-              {dishes.map(dish => (
+              {dishes.map((dish) => (
                 <div key={dish._id} className={`${styles.menuCardWrapper} flex-shrink-0`}>
                   <div className={`${styles.menuCard} card h-100 border-0 mx-2`}>
                     <div className={styles.cardImgContainer} style={{ height: '180px' }}>
                       <img
-                        src={`http://localhost:5000/uploads/${dish.image}`}
+                        src={`${API}/uploads/${dish.image}`}
                         className="card-img-top"
                         alt={dish.name}
                         loading="lazy"
@@ -157,7 +161,7 @@ const Home = () => {
                       <p className={styles.cardText}>
                         {dish.description || 'Chef special preparation'}
                       </p>
-                      <button 
+                      <button
                         className={`${styles.orderBtn} btn w-100 mt-auto`}
                         onClick={() => navigate(`/order/${dish._id}`)}
                       >
@@ -170,9 +174,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="container py-3">
-            {/* Additional content can go here */}
-          </div>
+          <div className="container py-3">{/* Extra space or content */}</div>
         </div>
       </div>
 

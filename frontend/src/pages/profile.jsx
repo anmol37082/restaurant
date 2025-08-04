@@ -17,11 +17,13 @@ const ProfilePage = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [message, setMessage] = useState('');
 
+  const API_BASE = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const getProfile = async () => {
       if (userId) {
         try {
-          const res = await axios.get(`http://localhost:5000/api/auth/user/${userId}`);
+          const res = await axios.get(`${API_BASE}/api/auth/user/${userId}`);
           setUserName(res.data.name || '');
           setUserAddress(res.data.address || '');
         } catch (err) {
@@ -34,7 +36,7 @@ const ProfilePage = () => {
 
   const sendOTP = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/send-otp', { email: loginEmail });
+      const res = await axios.post(`${API_BASE}/api/auth/send-otp`, { email: loginEmail });
       setOtpSent(true);
       setMessage(res.data.message);
     } catch (err) {
@@ -44,7 +46,7 @@ const ProfilePage = () => {
 
   const verifyOTP = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/verify-otp', {
+      const res = await axios.post(`${API_BASE}/api/auth/verify-otp`, {
         email: loginEmail,
         otp
       });
@@ -72,7 +74,7 @@ const ProfilePage = () => {
     }
 
     try {
-      await axios.put('http://localhost:5000/api/auth/update-profile', {
+      await axios.put(`${API_BASE}/api/auth/update-profile`, {
         userId,
         name: userName,
         address: userAddress

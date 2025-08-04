@@ -13,19 +13,20 @@ const OrderPage = () => {
   const [customer, setCustomer] = useState({ name: '', email: '', address: '' });
 
   const userId = localStorage.getItem('userId');
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (!userId) {
       alert("🔒 Please login before placing an order.");
-      navigate('/profile'); // redirect to login/profile
+      navigate('/profile');
+      return;
     }
 
-    // Fetch user profile data from MongoDB
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/auth/user/${userId}`);
+        const res = await axios.get(`${API_BASE_URL}/api/auth/user/${userId}`);
         setCustomer({
           name: res.data.name || '',
           email: res.data.email || '',
@@ -36,10 +37,9 @@ const OrderPage = () => {
       }
     };
 
-    // Fetch dish info
     const fetchDish = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/dishes');
+        const res = await axios.get(`${API_BASE_URL}/api/dishes`);
         const item = res.data.find(d => d._id === id);
         setDish(item);
       } catch (err) {
@@ -49,7 +49,7 @@ const OrderPage = () => {
 
     fetchUser();
     fetchDish();
-  }, [id, navigate, userId]);
+  }, [id, navigate, userId, API_BASE_URL]);
 
   const handleSubmitOrder = async () => {
     const totalPrice = dish.price * quantity;
@@ -65,7 +65,7 @@ const OrderPage = () => {
     };
 
     try {
-      await axios.post('http://localhost:5000/api/orders', payload);
+      await axios.post(`${API_BASE_URL}/api/orders`, payload);
       alert("✅ Order placed! Check your email.");
       setQuantity(1);
     } catch (err) {
@@ -94,7 +94,7 @@ const OrderPage = () => {
             <div className="card h-100 border-0 shadow" style={{ borderRadius: '15px' }}>
               <div style={{ height: '300px', overflow: 'hidden' }}>
                 <img
-                  src={`http://localhost:5000/uploads/${dish.image}`}
+                  src={`${API_BASE_URL}/uploads/${dish.image}`}
                   className="card-img-top"
                   alt={dish.name}
                   loading="lazy"

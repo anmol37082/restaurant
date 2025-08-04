@@ -9,9 +9,10 @@ import About from './pages/About';
 import Header from './components/Header';
 import Home from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
-// import UserLogin from './pages/UserLogin';
+import UserLogin from './pages/UserLogin';
 import MyOrders from './pages/MyOrders';
 import ProfilePage from './pages/profile';
+
 function App() {
   return (
     <Router>
@@ -21,10 +22,9 @@ function App() {
         <Route path="/order/:id" element={<OrderPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/header" element={<Header />} />
-        {/* <Route path="/login" element={<UserLogin />} /> */}
+        <Route path="/login" element={<UserLogin />} />
         <Route path="/my-orders" element={<MyOrders />} />
         <Route path="/profile" element={<ProfilePage />} />
-        
 
         {/* ✅ Admin login route */}
         <Route path="/admin-login" element={<AdminLogin />} />

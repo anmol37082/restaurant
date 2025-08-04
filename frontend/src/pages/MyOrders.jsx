@@ -4,23 +4,24 @@ import styles from './MyOrders.module.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const [userId] = useState(localStorage.getItem('userId') || '');
 
-  // Wrap fetchMyOrders in useCallback to memoize it
   const fetchMyOrders = useCallback(async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/orders/my-orders/${userId}`);
+      const res = await axios.get(`${API_URL}/api/orders/my-orders/${userId}`);
       setOrders(res.data);
     } catch (err) {
       console.error("❌ Fetch orders failed", err);
     }
-  }, [userId]); // Add dependencies here
+  }, [userId]);
 
   const handleCancel = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/orders/${id}/cancel`, {
+      await axios.put(`${API_URL}/api/orders/${id}/cancel`, {
         reason: "Order cancelled by customer"
       });
       alert("✅ Order cancelled");
@@ -45,8 +46,7 @@ const MyOrders = () => {
 
   return (
     <>
-      <Header/>
-      
+      <Header />
       <div className={styles.myOrdersContainer}>
         <div className={styles.header}>
           <h3>🛒 My Orders</h3>
@@ -64,16 +64,16 @@ const MyOrders = () => {
         ) : (
           <div className={styles.ordersGrid}>
             {orders.map(order => {
-              const canCancel = order.status === 'Pending' && 
-                              Math.floor((new Date() - new Date(order.createdAt)) / (1000 * 60)) <= 10;
+              const canCancel = order.status === 'Pending' &&
+                Math.floor((new Date() - new Date(order.createdAt)) / (1000 * 60)) <= 10;
 
               return (
                 <div key={order._id} className={styles.orderCard}>
                   <div className={styles.cardHeader}>
                     <h4>{order.dishName}</h4>
                     <span className={`${styles.statusBadge} ${
-                      order.status === 'Cancelled' ? styles.cancelled : 
-                      order.status === 'Delivered' ? styles.delivered : styles.pending
+                      order.status === 'Cancelled' ? styles.cancelled :
+                        order.status === 'Delivered' ? styles.delivered : styles.pending
                     }`}>
                       {order.status}
                     </span>
@@ -102,7 +102,7 @@ const MyOrders = () => {
 
                   <div className={styles.cardFooter}>
                     {canCancel ? (
-                      <button 
+                      <button
                         className={styles.cancelButton}
                         onClick={() => handleCancel(order._id)}
                       >
@@ -120,7 +120,6 @@ const MyOrders = () => {
           </div>
         )}
       </div>
-      
       <Footer />
     </>
   );

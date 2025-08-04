@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from './OrderList.module.css'; // Create this CSS module
+import styles from './OrderList.module.css'; // Make sure this CSS module exists
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   const fetchOrders = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/orders');
+      const res = await axios.get(`${API_BASE_URL}/api/orders`);
       setOrders(res.data);
     } catch (err) {
       console.error("Failed to fetch orders:", err);
@@ -16,7 +18,7 @@ const OrderList = () => {
 
   const handleDeliver = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/orders/${id}/status`);
+      await axios.put(`${API_BASE_URL}/api/orders/${id}/status`);
       fetchOrders();
     } catch (err) {
       console.error("❌ Delivery update failed", err);
@@ -27,7 +29,7 @@ const OrderList = () => {
   const handleCancel = async (id) => {
     if (window.confirm("❌ Cancel this order?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/orders/${id}/cancel`);
+        await axios.delete(`${API_BASE_URL}/api/orders/${id}/cancel`);
         fetchOrders();
       } catch (err) {
         console.error("❌ Cancel failed", err);
@@ -39,7 +41,7 @@ const OrderList = () => {
   const handleDelete = async (id) => {
     if (window.confirm("🗑️ Delete this delivered order?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/orders/${id}/delete`);
+        await axios.delete(`${API_BASE_URL}/api/orders/${id}/delete`);
         fetchOrders();
       } catch (err) {
         console.error("❌ Delete failed", err);
