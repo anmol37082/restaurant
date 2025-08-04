@@ -75,7 +75,7 @@ const Header = ({ subtitle = '' }) => {
           {/* ✅ Admin Button */}
           <button
             className={styles.profileButton}
-            onClick={() => handleNavigation('/admin/login')}
+            onClick={() => handleNavigation('/admin')}
             aria-label="Admin Login"
           >
             <FaUserShield className={styles.profileIcon} />
