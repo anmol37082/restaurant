@@ -8,7 +8,9 @@ import OrderPage from './pages/OrderPage';
 import About from './pages/About';
 import Header from './components/Header';
 import Home from './pages/Home';
-import PrivateRoute from './components/PrivateRoute';
+import AdminSidebar from './components/AdminSidebar';
+import AddMenu from './pages/AddMenu';
+import OrderList from './pages/OrderList';
 import UserLogin from './pages/UserLogin';
 import MyOrders from './pages/MyOrders';
 import ProfilePage from './pages/profile';
@@ -26,6 +28,9 @@ function App() {
         <Route path="/my-orders" element={<MyOrders />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/add-menu" element={<AddMenu />} />
+        <Route path="/admin/orders" element={<OrderList />} />
+       
       </Routes>
     </Router>
   );
