@@ -27,7 +27,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
 
         {/* ✅ Admin login route */}
-        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
 
         {/* ✅ Protected Admin Panel */}
         <Route

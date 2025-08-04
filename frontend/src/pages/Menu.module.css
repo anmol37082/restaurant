@@ -1,104 +1,437 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
 
-.menuContainer {
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to bottom right, #fff8f0, #ffe6e6);
+/* Base Styles with Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+.menuPage {
   min-height: 100vh;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
 }
 
-.heading {
+/* Improved Hero Section with Parallax Effect */
+.heroSection {
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+    url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') center/cover fixed;
+  color: white;
+  padding: 6rem 0;
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #333;
-  text-transform: uppercase;
-  font-weight: 700;
+  position: relative;
+  overflow: hidden;
 }
 
-.menuGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: auto;
+.heroSection h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.heroSection p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Main Content Container with Gradient Borders */
+.mainContainer {
+  padding: 4rem 0;
+  background: white;
+  position: relative;
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.08);
+}
+
+.mainContainer::before,
+.mainContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(to bottom, #e67e22, #d35400);
+}
+
+.mainContainer::before {
+  left: 0;
+}
+
+.mainContainer::after {
+  right: 0;
+}
+
+/* Section Title with Animated Underline */
+.sectionTitle {
+  position: relative;
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.sectionTitleDecoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 4px;
+  background: #e67e22;
+  border-radius: 2px;
+  transition: width 0.3s ease-out;
+}
+
+.sectionTitle:hover .sectionTitleDecoration {
+  width: 100%;
+}
+
+/* Enhanced Slider Styles with Momentum Scrolling */
+.sliderContainer {
+  overflow-x: auto;
+  cursor: grab;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: 20px 0 40px;
+  width: 100%;
+  overscroll-behavior-x: contain;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 20px,
+    black calc(100% - 20px),
+    transparent
+  );
+}
+
+.sliderContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.sliderContainer.grabbing {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+.sliderTrack {
+  display: flex;
+  gap: 25px;
+  padding: 0 20px;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Improved Menu Card Styles with 3D Effect */
+.menuCardWrapper {
+  width: min(280px, 80vw);
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  perspective: 1000px;
 }
 
 .menuCard {
-  background-color: #fff;
+  transition: 
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.3s ease-out;
   border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-  padding-bottom: 1rem;
+  border: none;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform-style: preserve-3d;
 }
 
 .menuCard:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: 
+    translateY(-8px)
+    rotateX(2deg)
+    rotateY(2deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-.menuImage {
-  width: 100%;
+.cardImgContainer {
+  position: relative;
+  overflow: hidden;
   height: 200px;
+  flex-shrink: 0;
+  transform: translateZ(30px);
+}
+
+.cardImgContainer img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-bottom: 1px solid #eee;
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.menuName {
-  font-size: 1.5rem;
-  margin: 0.5rem 0;
-  color: #222;
-  font-weight: 600;
+.menuCard:hover .cardImgContainer img {
+  transform: scale(1.1) rotate(1deg);
 }
 
-.menuDescription {
-  font-size: 1rem;
-  margin: 0.5rem 1rem;
-  color: #666;
-  min-height: 60px;
-}
-
-.menuPrice {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #e91e63;
-  margin-top: 0.5rem;
-}
-
-.orderButton {
-  display: inline-block;
-  margin-top: 1rem;
-  background-color: #ff4d4d;
+.priceBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #e67e22, #d35400);
   color: white;
-  padding: 0.5rem 1.2rem;
-  border-radius: 8px;
-  text-decoration: none;
+  padding: 6px 15px;
+  border-radius: 20px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform: translateZ(40px);
+  transition: all 0.3s ease;
 }
 
-.orderButton:hover {
-  background-color: #e60000;
+.menuCard:hover .priceBadge {
+  transform: translateZ(40px) scale(1.05);
 }
 
-/* Responsive tweaks */
-@media (max-width: 600px) {
-  .heading {
-    font-size: 2rem;
-  }
+.cardBody {
+  padding: 1.75rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  transform: translateZ(20px);
+}
 
-  .menuDescription {
-    font-size: 0.9rem;
-  }
+.cardTitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
 
-  .menuPrice {
-    font-size: 1.1rem;
-  }
+.menuCard:hover .cardTitle {
+  color: #e67e22;
+}
 
-  .orderButton {
-    font-size: 0.9rem;
-    padding: 0.4rem 1rem;
+.cardText {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+  line-height: 1.6;
+}
+
+.orderBtn {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  border: none;
+  color: white;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 8px rgba(230, 126, 34, 0.3);
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.orderBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+.orderBtn:hover {
+  background: linear-gradient(135deg, #d35400, #e67e22);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(230, 126, 34, 0.4);
+}
+
+.orderBtn:hover::after {
+  left: 100%;
+}
+
+/* View Full Menu Button - Theme Matched */
+.viewFullMenuBtn {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: 2px solid #e67e22;
+  color: #e67e22;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  padding: 10px 25px;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.viewFullMenuBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  transition: width 0.4s ease-out;
+  z-index: -1;
+}
+
+.viewFullMenuBtn:hover {
+  color: white;
+  border-color: #d35400;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+}
+
+.viewFullMenuBtn:hover::before {
+  width: 100%;
+}
+
+/* Footer with Gradient Background */
+.footer {
+  background: linear-gradient(135deg, #343a40, #23272b);
+  color: white;
+  padding: 3rem 0;
+  margin-top: auto;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(to right, #e67e22, #d35400);
+}
+
+/* Responsive Adjustments with Fluid Typography */
+@media (max-width: 1200px) {
+  .menuCardWrapper {
+    width: min(260px, 75vw);
   }
+}
+
+@media (max-width: 992px) {
+  .heroSection {
+    padding: 5rem 0;
+  }
+  
+  .menuCardWrapper {
+    width: min(240px, 70vw);
+  }
+  
+  .cardBody {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 4rem 0;
+    background-attachment: scroll;
+  }
+  
+  .mainContainer {
+    padding: 3rem 0;
+  }
+  
+  .menuCardWrapper {
+    width: min(220px, 65vw);
+  }
+  
+  .cardImgContainer {
+    height: 180px;
+  }
+}
+
+@media (max-width: 576px) {
+  .heroSection {
+    padding: 3.5rem 1rem;
+  }
+  
+  .menuCardWrapper {
+    width: min(200px, 85vw);
+  }
+  
+  .cardImgContainer {
+    height: 160px;
+  }
+  
+  .cardBody {
+    padding: 1.25rem;
+  }
+  
+  .sliderTrack {
+    gap: 15px;
+    padding: 0 15px;
+  }
+}
+
+/* Accessibility Focus Styles */
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #e67e22;
+  outline-offset: 3px;
+}
+
+/* Override Bootstrap primary colors if needed */
+:root {
+  --bs-primary: #e67e22;
+  --bs-primary-rgb: 230, 126, 34;
+}
+
+.btn-primary {
+  background-color: #e67e22;
+  border-color: #e67e22;
+}
+
+.btn-primary:hover {
+  background-color: #d35400;
+  border-color: #d35400;
+}
+
+.btn-outline-primary {
+  color: #e67e22;
+  border-color: #e67e22;
+}
+
+.btn-outline-primary:hover {
+  background-color: #e67e22;
+  border-color: #e67e22;
+  color: white;
 }
