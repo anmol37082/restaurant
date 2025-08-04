@@ -1,7 +1,7 @@
 import { 
   FaUtensils, FaBars, FaTimes, FaHome, 
   FaHamburger, FaInfoCircle, FaClipboardList, 
-  FaUser // Added profile icon
+  FaUser, FaUserShield // 👈 Added Admin icon
 } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
@@ -62,6 +62,7 @@ const Header = ({ subtitle = '' }) => {
               <span>{item.label}</span>
             </button>
           ))}
+          
           {/* Profile Icon */}
           <button
             className={styles.profileButton}
@@ -69,6 +70,15 @@ const Header = ({ subtitle = '' }) => {
             aria-label="Profile"
           >
             <FaUser className={styles.profileIcon} />
+          </button>
+
+          {/* ✅ Admin Button */}
+          <button
+            className={styles.profileButton}
+            onClick={() => handleNavigation('/admin/login')}
+            aria-label="Admin Login"
+          >
+            <FaUserShield className={styles.profileIcon} />
           </button>
         </nav>
 
@@ -101,6 +111,7 @@ const Header = ({ subtitle = '' }) => {
               <span>{item.label}</span>
             </button>
           ))}
+
           {/* Profile in Mobile Menu */}
           <button 
             className={styles.mobileNavButton}
@@ -108,6 +119,15 @@ const Header = ({ subtitle = '' }) => {
           >
             <FaUser />
             <span>Profile</span>
+          </button>
+
+          {/* ✅ Admin in Mobile Menu */}
+          <button 
+            className={styles.mobileNavButton}
+            onClick={() => handleNavigation('/admin/login')}
+          >
+            <FaUserShield />
+            <span>Admin</span>
           </button>
         </div>
       </div>
