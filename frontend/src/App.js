@@ -29,7 +29,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/addmenu" element={<AddMenu />} />
-        <Route path="/OrderList" element={<OrderList />} />
+        <Route path="/admin/add-menu" element={<OrderList />} />
         <Route path="/AdminSidebar" element={<AdminSidebar />} />
 
 
