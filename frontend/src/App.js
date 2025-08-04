@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import About from './pages/About';
-import Profile from './pages/Profile';
+import Profile from './pages/profile';
 import MyOrders from './pages/MyOrders';
 import OrderPage from './pages/OrderPage';
 
