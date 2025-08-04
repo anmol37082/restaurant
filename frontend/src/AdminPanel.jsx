@@ -1,13 +1,12 @@
-// src/AdminPanel.jsx
 import React from 'react';
-import AdminSidebar from './components/AdminSidebar';
 import { Outlet } from 'react-router-dom';
+import AdminSidebar from './AdminSidebar';
 
 const AdminPanel = () => {
   return (
     <div style={{ display: 'flex' }}>
       <AdminSidebar />
-      <div style={{ flex: 1, marginLeft: '220px', padding: '20px' }}>
+      <div style={{ marginLeft: '220px', padding: '20px', width: '100%' }}>
         <Outlet />
       </div>
     </div>
