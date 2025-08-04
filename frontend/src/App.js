@@ -1,25 +1,101 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import AdminLogin from './components/AdminLogin';
-import AdminPanel from './components/AdminPanel';
-import PrivateRoute from './components/PrivateRoute';
-import AddMenu from './components/AddMenu';
-import OrderList from './components/OrderList';
+
 import Home from './pages/Home';
 import Menu from './pages/Menu';
+import About from './pages/About';
+import OrderPage from './pages/OrderPage';
+import UserLogin from './pages/UserLogin';
+import MyOrders from './pages/MyOrders';
+import ProfilePage from './pages/profile';
 
-const App = () => {
+import AdminLogin from './pages/AdminLogin';
+import AdminPanel from './AdminPanel';
+import AddMenu from './pages/AddMenu';
+import OrderList from './pages/OrderList';
+
+import PrivateRoute from './components/PrivateRoute';
+import Header from './components/Header';
+
+function App() {
   return (
     <Router>
-      <Header /> {/* ✅ Only here */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/admin" element={<AdminLogin />} />
+        {/* Public Routes with Header */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Header />
+              <Home />
+            </>
+          }
+        />
+        <Route
+          path="/menu"
+          element={
+            <>
+              <Header />
+              <Menu />
+            </>
+          }
+        />
+        <Route
+          path="/order/:id"
+          element={
+            <>
+              <Header />
+              <OrderPage />
+            </>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <>
+              <Header />
+              <About />
+            </>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <>
+              <Header />
+              <UserLogin />
+            </>
+          }
+        />
+        <Route
+          path="/my-orders"
+          element={
+            <>
+              <Header />
+              <MyOrders />
+            </>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <>
+              <Header />
+              <ProfilePage />
+            </>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <>
+              <Header />
+              <AdminLogin />
+            </>
+          }
+        />
 
-        {/* Private admin panel with sidebar and nested routes */}
+        {/* Admin Panel with Sidebar (NO public Header) */}
         <Route
           path="/adminpanel"
           element={
@@ -28,14 +104,13 @@ const App = () => {
             </PrivateRoute>
           }
         >
-          <Route index element={<AddMenu />} /> {/* ✅ default route */}
+          <Route index element={<AddMenu />} />
           <Route path="add-menu" element={<AddMenu />} />
           <Route path="orders" element={<OrderList />} />
         </Route>
       </Routes>
-      <Footer />
     </Router>
   );
-};
+}
 
 export default App;
