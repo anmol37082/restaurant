@@ -1,249 +1,183 @@
+/* Menu.module.css */
+
 /* Base Styles */
-.menuPage {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #f8f9fa;
-  font-family: 'Montserrat', sans-serif;
-  line-height: 1.6;
-}
-
-/* Loading and Error States */
-.loadingContainer,
-.errorContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  text-align: center;
-}
-
-.loadingSpinner {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #e67e22;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 1rem;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.errorMessage {
-  color: #d9534f;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-.retryButton {
-  padding: 0.8rem 1.5rem;
-  background-color: #e67e22;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.retryButton:hover {
-  background-color: #d35400;
-}
-
-/* Hero Section */
-.heroSection {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-              url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') center/cover;
-  color: white;
-  padding: 8rem 2rem;
-  text-align: center;
-  position: relative;
-}
-
-.heroContent {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.heroSection h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
-
-.heroSection p {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  opacity: 0.9;
-}
-
-/* Main Container */
-.mainContainer {
-  padding: 4rem 0;
-  background: white;
-  position: relative;
-}
-
-.container {
+.menuContainer {
+  padding: 2rem 1rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
 }
 
-/* Section Title */
-.sectionTitle {
-  position: relative;
-  display: inline-block;
+.heading {
+  text-align: center;
+  margin-bottom: 2.5rem;
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 600;
   color: #333;
-  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  position: relative;
   padding-bottom: 0.5rem;
 }
 
-.sectionTitleDecoration {
+.heading::after {
+  content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
   height: 4px;
-  background: #e67e22;
+  background: linear-gradient(to right, #e67e22, #d35400);
   border-radius: 2px;
-  transition: width 0.3s ease-out;
 }
 
-.sectionTitle:hover .sectionTitleDecoration {
-  width: 100%;
-}
-
-/* Menu Grid */
+/* Menu Grid Layout */
 .menuGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
-/* Menu Card */
-.menuCard {
-  background: #fff;
+/* Menu Card Styles */
+.card {
+  background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.menuCard:hover {
+.card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
-.cardImgContainer {
+.imageContainer {
   position: relative;
-  height: 200px;
+  width: 100%;
+  height: 220px;
   overflow: hidden;
 }
 
-.cardImgContainer img {
+.image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.menuCard:hover .cardImgContainer img {
+.card:hover .image {
   transform: scale(1.05);
 }
 
-.priceBadge {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: linear-gradient(135deg, #e67e22, #d35400);
-  color: white;
-  padding: 6px 15px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 0.95rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+/* Card Content */
+.cardContent {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.cardBody {
-  padding: 1.75rem;
-}
-
-.cardTitle {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.5rem;
-  font-weight: 700;
+.name {
+  font-size: 1.4rem;
   margin-bottom: 0.75rem;
   color: #333;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
 }
 
-.cardText {
-  font-size: 0.95rem;
+.description {
   color: #666;
-  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
   line-height: 1.6;
+  margin-bottom: 1rem;
+  flex-grow: 1;
 }
 
+.price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #e67e22;
+  margin-bottom: 1rem;
+}
+
+/* Order Button */
 .orderBtn {
   display: block;
-  background: linear-gradient(135deg, #e67e22, #d35400);
-  color: white;
-  padding: 12px 0;
-  border-radius: 8px;
   text-align: center;
+  background: linear-gradient(to right, #e67e22, #d35400);
+  color: white;
+  padding: 0.75rem;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
 }
 
 .orderBtn:hover {
-  background: linear-gradient(135deg, #d35400, #e67e22);
+  background: linear-gradient(to right, #d35400, #e67e22);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #666;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
-  .heroSection {
-    padding: 6rem 2rem;
+  .menuGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
   
-  .menuGrid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  .imageContainer {
+    height: 200px;
   }
 }
 
 @media (max-width: 768px) {
-  .heroSection {
-    padding: 5rem 1.5rem;
+  .menuContainer {
+    padding: 1.5rem 1rem;
   }
   
-  .mainContainer {
-    padding: 3rem 0;
+  .heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
   }
   
-  .container {
-    padding: 0 1.5rem;
+  .menuGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 576px) {
-  .heroSection {
-    padding: 4rem 1rem;
+  .heading {
+    font-size: 1.8rem;
   }
   
   .menuGrid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
   
-  .cardImgContainer {
+  .imageContainer {
     height: 180px;
+  }
+  
+  .cardContent {
+    padding: 1.25rem;
   }
 }

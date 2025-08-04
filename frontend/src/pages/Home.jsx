@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import styles from './Menu.module.css';
+import './Home.css';
 import { FaArrowRight } from 'react-icons/fa';
 
 const Home = () => {
@@ -34,27 +34,31 @@ const Home = () => {
 
   const onMouseLeave = () => {
     setIsDragging(false);
-    sliderRef.current.style.cursor = 'grab';
-    sliderRef.current.style.scrollBehavior = 'smooth';
+    if (sliderRef.current) {
+      sliderRef.current.style.cursor = 'grab';
+      sliderRef.current.style.scrollBehavior = 'smooth';
+    }
   };
 
   const onMouseUp = () => {
     setIsDragging(false);
-    sliderRef.current.style.cursor = 'grab';
-    sliderRef.current.style.scrollBehavior = 'smooth';
+    if (sliderRef.current) {
+      sliderRef.current.style.cursor = 'grab';
+      sliderRef.current.style.scrollBehavior = 'smooth';
 
-    const endTime = performance.now();
-    const timeDiff = endTime - startTime;
-    if (timeDiff < 100) {
-      const velocity = (scrollLeft - sliderRef.current.scrollLeft) / timeDiff;
-      const momentum = velocity * 100;
-      const targetScroll = sliderRef.current.scrollLeft - momentum;
-      smoothScrollTo(sliderRef.current, targetScroll, 1000);
+      const endTime = performance.now();
+      const timeDiff = endTime - startTime;
+      if (timeDiff < 100) {
+        const velocity = (scrollLeft - sliderRef.current.scrollLeft) / timeDiff;
+        const momentum = velocity * 100;
+        const targetScroll = sliderRef.current.scrollLeft - momentum;
+        smoothScrollTo(sliderRef.current, targetScroll, 1000);
+      }
     }
   };
 
   const onMouseMove = (e) => {
-    if (!isDragging) return;
+    if (!isDragging || !sliderRef.current) return;
     e.preventDefault();
     const x = e.pageX - sliderRef.current.offsetLeft;
     const walk = (x - startX) * 1.5;
@@ -83,15 +87,14 @@ const Home = () => {
   const easeOutQuad = (t) => t * (2 - t);
 
   return (
-    <div className={styles.menuPage}>
+    <div className="menuPage">
       <Header />
 
       {/* Hero Section */}
       <section
-        className={`${styles.heroSection} py-5`}
+        className="heroSection py-5"
         style={{
-          backgroundImage:
-            'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1517248135467-4c7edcad34c4)'
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1517248135467-4c7edcad34c4)'
         }}
       >
         <div className="container text-center text-white">
@@ -116,15 +119,12 @@ const Home = () => {
         >
           <div className="container py-4">
             <div className="d-flex justify-content-between align-items-center mb-4 px-3">
-              <h2
-                className={`${styles.sectionTitle} position-relative d-inline-block m-0`}
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
+              <h2 className="sectionTitle position-relative d-inline-block m-0">
                 Our Special Dishes
-                <span className={styles.sectionTitleDecoration}></span>
+                <span className="sectionTitleDecoration"></span>
               </h2>
               <button
-                className={`${styles.viewFullMenuBtn} btn d-flex align-items-center`}
+                className="viewFullMenuBtn btn d-flex align-items-center"
                 onClick={() => navigate('/menu')}
               >
                 View Full Menu <FaArrowRight className="ms-2" />
@@ -134,35 +134,33 @@ const Home = () => {
 
           {/* Slider */}
           <div
-            className={`${styles.sliderContainer}`}
+            className={`sliderContainer ${isDragging ? 'grabbing' : ''}`}
             ref={sliderRef}
             onMouseDown={onMouseDown}
             onMouseLeave={onMouseLeave}
             onMouseUp={onMouseUp}
             onMouseMove={onMouseMove}
           >
-            <div className={`${styles.sliderTrack} d-flex`}>
+            <div className="sliderTrack d-flex">
               {dishes.map((dish) => (
-                <div key={dish._id} className={`${styles.menuCardWrapper} flex-shrink-0`}>
-                  <div className={`${styles.menuCard} card h-100 border-0 mx-2`}>
-                    <div className={styles.cardImgContainer} style={{ height: '180px' }}>
+                <div key={dish._id} className="menuCardWrapper flex-shrink-0">
+                  <div className="menuCard card h-100 border-0 mx-2">
+                    <div className="cardImgContainer" style={{ height: '180px' }}>
                       <img
                         src={`${API}/uploads/${dish.image}`}
                         className="card-img-top"
                         alt={dish.name}
                         loading="lazy"
                       />
-                      <div className={styles.priceBadge}>₹{dish.price}</div>
+                      <div className="priceBadge">₹{dish.price}</div>
                     </div>
                     <div className="card-body">
-                      <h5 className={styles.cardTitle} style={{ fontFamily: "'Dancing Script', cursive" }}>
-                        {dish.name}
-                      </h5>
-                      <p className={styles.cardText}>
+                      <h5 className="cardTitle">{dish.name}</h5>
+                      <p className="cardText">
                         {dish.description || 'Chef special preparation'}
                       </p>
                       <button
-                        className={`${styles.orderBtn} btn w-100 mt-auto`}
+                        className="orderBtn btn w-100 mt-auto"
                         onClick={() => navigate(`/order/${dish._id}`)}
                       >
                         Order Now
@@ -174,7 +172,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="container py-3">{/* Extra space or content */}</div>
+          <div className="container py-3"></div>
         </div>
       </div>
 
