@@ -1,0 +1,147 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cardHeader {
+  background: #e63946;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.cardHeader h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.cardHeader p {
+  margin: 0.5rem 0 0;
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+.headerIcon {
+  font-size: 1.2rem;
+}
+
+.cardBody {
+  padding: 2rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.inputIcon {
+  color: #e63946;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.formInput:focus {
+  border-color: #e63946;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+}
+
+.primaryButton, .successButton {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.primaryButton {
+  background: #e63946;
+  color: white;
+}
+
+.primaryButton:hover {
+  background: #c1121f;
+}
+
+.successButton {
+  background: #2a9d8f;
+  color: white;
+}
+
+.successButton:hover {
+  background: #21867a;
+}
+
+.buttonIcon {
+  font-size: 0.9rem;
+}
+
+.message {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+@media (max-width: 576px) {
+  .loginContainer {
+    padding: 1rem;
+  }
+  
+  .loginCard {
+    border-radius: 8px;
+  }
+  
+  .cardHeader, .cardBody {
+    padding: 1.25rem;
+  }
+}

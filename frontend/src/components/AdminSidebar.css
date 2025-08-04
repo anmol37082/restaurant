@@ -1,0 +1,13 @@
+.nav-link {
+  transition: 0.2s;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #ffc107 !important; /* Bootstrap warning yellow */
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}

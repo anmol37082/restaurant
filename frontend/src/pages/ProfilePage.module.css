@@ -1,0 +1,192 @@
+.profileContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileCard {
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cardHeader {
+  background: #e63946;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardHeader h4 {
+  margin: 0.5rem 0 0;
+  font-weight: 600;
+}
+
+.profileIcon {
+  font-size: 2rem;
+}
+
+.cardBody {
+  padding: 2rem;
+}
+
+.loginForm, .profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.loginTitle {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.inputIcon {
+  color: #e63946;
+}
+
+.formInput {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.formInput:focus {
+  border-color: #e63946;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+}
+
+.addressInput {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.primaryButton, .successButton, .saveButton, .logoutButton {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.primaryButton {
+  background: #e63946;
+  color: white;
+}
+
+.primaryButton:hover {
+  background: #c1121f;
+}
+
+.successButton {
+  background: #2a9d8f;
+  color: white;
+}
+
+.successButton:hover {
+  background: #21867a;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.saveButton {
+  background: #2a9d8f;
+  color: white;
+  flex: 1;
+}
+
+.saveButton:hover {
+  background: #21867a;
+}
+
+.logoutButton {
+  background: #e63946;
+  color: white;
+  flex: 1;
+}
+
+.logoutButton:hover {
+  background: #c1121f;
+}
+
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.alertSuccess {
+  background: #d4edda;
+  color: #155724;
+}
+
+.alertDanger {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.userEmail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #f8f9fa;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.emailIcon {
+  color: #e63946;
+}
+
+@media (max-width: 576px) {
+  .profileContainer {
+    padding: 1rem;
+  }
+  
+  .buttonGroup {
+    flex-direction: column;
+  }
+}

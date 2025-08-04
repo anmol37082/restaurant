@@ -1,0 +1,159 @@
+.header {
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 60px; /* Reduced from typical 70-80px */
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.logoIcon {
+  font-size: 1.5rem;
+  color: #e63946;
+}
+
+.logoText {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.desktopNav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.navButton:hover {
+  background-color: #f5f5f5;
+  color: #e63946;
+}
+
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobileNav {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: #fff;
+  width: 200px;
+  box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 0 8px;
+  overflow: hidden;
+  z-index: 99;
+}
+
+.mobileNavOpen {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileNavButton {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: none;
+  border: none;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobileNavButton:hover {
+  background-color: #f5f5f5;
+}
+
+.subtitleContainer {
+  background-color: #f8f9fa;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.subtitleText {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .desktopNav {
+    display: none;
+  }
+  
+  .mobileMenuButton {
+    display: block;
+  }
+}
+
+
+/* Add these to your existing Header.module.css */
+
+.profileButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileIcon {
+  font-size: 1.2rem;
+  color: #333;
+  transition: all 0.2s;
+}
+
+.profileButton:hover .profileIcon {
+  color: #e63946;
+  transform: scale(1.1);
+}
+
+/* For mobile view */
+.mobileNav .profileButton {
+  display: none; /* We're showing the profile as a regular nav item in mobile */
+}
