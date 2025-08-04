@@ -122,13 +122,15 @@ const Header = ({ subtitle = '' }) => {
           </button>
 
           {/* ✅ Admin in Mobile Menu */}
-          <button 
-            className={styles.mobileNavButton}
-            onClick={() => handleNavigation('/admin')}
-          >
-            <FaUserShield />
-            <span>Admin</span>
-          </button>
+        // Admin button in Header.jsx
+<button
+  className={styles.profileButton}
+  onClick={() => handleNavigation('/admin')}
+  aria-label="Admin Login"
+>
+  <FaUserShield className={styles.profileIcon} />
+</button>
+
         </div>
       </div>
 

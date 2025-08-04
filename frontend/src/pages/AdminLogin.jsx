@@ -1,7 +1,8 @@
+// src/pages/AdminLogin.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from './AdminLogin.module.css'; // Make sure this CSS module exists
+import styles from './AdminLogin.module.css';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -17,7 +18,7 @@ const AdminLogin = () => {
       });
       if (res.data.success) {
         localStorage.setItem('adminToken', res.data.token);
-        navigate('/AdminSidebar'); // Redirect to admin dashboard
+        navigate('/adminpanel'); // ✅ redirect to admin layout
       }
     } catch (err) {
       alert('Login failed. Check credentials.');
@@ -38,7 +39,6 @@ const AdminLogin = () => {
             <input
               type="email"
               id="email"
-              placeholder="admin@example.com"
               className={styles.formInput}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -51,7 +51,6 @@ const AdminLogin = () => {
             <input
               type="password"
               id="password"
-              placeholder="••••••••"
               className={styles.formInput}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
