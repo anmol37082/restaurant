@@ -1,7 +1,7 @@
 import { 
   FaUtensils, FaBars, FaTimes, FaHome, 
   FaHamburger, FaInfoCircle, FaClipboardList, 
-  FaUser, FaUserShield
+  FaUser, FaUserShield // 👈 Added Admin icon
 } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
@@ -12,16 +12,13 @@ const Header = ({ subtitle = '' }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // Toggle mobile menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  // Handle navigation and close mobile menu
   const handleNavigation = (path) => {
     navigate(path);
     setIsMenuOpen(false);
   };
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -32,7 +29,6 @@ const Header = ({ subtitle = '' }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Navigation items
   const navItems = [
     { path: '/', icon: <FaHome />, label: 'Home' },
     { path: '/menu', icon: <FaHamburger />, label: 'Menu' },
@@ -76,7 +72,7 @@ const Header = ({ subtitle = '' }) => {
             <FaUser className={styles.profileIcon} />
           </button>
 
-          {/* Admin Button */}
+          {/* ✅ Admin Button */}
           <button
             className={styles.profileButton}
             onClick={() => handleNavigation('/admin')}
@@ -125,7 +121,7 @@ const Header = ({ subtitle = '' }) => {
             <span>Profile</span>
           </button>
 
-          {/* Admin in Mobile Menu */}
+          {/* ✅ Admin in Mobile Menu */}
           <button 
             className={styles.mobileNavButton}
             onClick={() => handleNavigation('/admin')}
