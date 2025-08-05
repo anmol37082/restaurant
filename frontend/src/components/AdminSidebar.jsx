@@ -1,4 +1,3 @@
-// src/components/AdminSidebar.jsx
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './AdminSidebar.css';
@@ -19,9 +18,9 @@ const AdminSidebar = () => {
       <div>
         <h4 className="text-center mb-4">🍴 Admin Panel</h4>
         <ul className="nav flex-column">
-          <li className="nav-item mb-2">
+          <li className="nav-item mb-2" key="add-menu">
             <NavLink
-              to="/add-menu"
+              to="/admin/add-menu"
               className={({ isActive }) =>
                 `nav-link ${isActive ? 'active text-warning' : 'text-white'}`
               }
@@ -29,7 +28,7 @@ const AdminSidebar = () => {
               🍽️ Add Menu
             </NavLink>
           </li>
-          <li className="nav-item">
+          <li className="nav-item" key="order-details">
             <NavLink
               to="/admin/orders"
               className={({ isActive }) =>
