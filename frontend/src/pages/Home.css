@@ -1,117 +1,342 @@
-.container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.heading {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.subheading {
-  text-align: center;
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-  color: #777;
-}
-
-.cardGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+/* Home.css */
+.menuPage {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s;
+  background-color: #f8f9fa;
+  font-family: 'Montserrat', sans-serif;
 }
 
-.card:hover {
-  transform: scale(1.02);
+/* Hero Section */
+.heroSection {
+  background-size: cover;
+  background-position: center;
+  padding: 6rem 0;
+  color: white;
+  text-align: center;
 }
 
-.cardImage {
+/* Slider Container */
+.sliderContainer {
+  overflow-x: auto;
+  cursor: grab;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: 20px 0 40px;
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  overscroll-behavior-x: contain;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 20px,
+    black calc(100% - 20px),
+    transparent
+  );
 }
 
-.cardBody {
+.sliderContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.sliderContainer.grabbing {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+.sliderTrack {
+  display: flex;
+  gap: 25px;
+  padding: 0 20px;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Menu Card */
+.menuCardWrapper {
+  width: min(280px, 80vw);
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  perspective: 1000px;
+  height: 480px; /* Fixed height for all cards */
+}
+
+.menuCard {
+  transition: 
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.3s ease-out;
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform-style: preserve-3d;
+}
+
+.menuCard:hover {
+  transform: 
+    translateY(-8px)
+    rotateX(2deg)
+    rotateY(2deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cardImgContainer {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+  flex-shrink: 0;
+  transform: translateZ(30px);
+}
+
+.cardImgContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.menuCard:hover .cardImgContainer img {
+  transform: scale(1.1) rotate(1deg);
+}
+
+.priceBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  color: white;
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform: translateZ(40px);
+  transition: all 0.3s ease;
+}
+
+.menuCard:hover .priceBadge {
+  transform: translateZ(40px) scale(1.05);
+}
+
+/* Card Body */
+.card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
 }
 
 .cardTitle {
-  font-size: 1.25rem;
-  margin-bottom: 8px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
   color: #333;
+  transition: color 0.3s ease;
+}
+
+.menuCard:hover .cardTitle {
+  color: #e67e22;
+}
+
+/* Text Container */
+.cardTextContainer {
+  flex-grow: 1;
+  overflow: hidden;
+  margin-bottom: 1rem;
 }
 
 .cardText {
-  color: #555;
   font-size: 0.95rem;
-  margin-bottom: 10px;
-  line-height: 1.4;
-  min-height: 4.2em;
+  color: #666;
+  line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-height: 4.8em; /* 3 lines * 1.6 line-height */
 }
 
-.price {
-  font-weight: bold;
-  color: #e91e63;
+/* Button Container */
+.orderBtnContainer {
   margin-top: auto;
-  margin-bottom: 10px;
+  padding-top: 10px;
 }
 
-.orderButton {
-  text-align: center;
-  background-color: #ff5722;
-  color: #fff;
-  padding: 10px;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
-  margin-top: auto;
-  transition: background-color 0.3s ease;
+.orderBtn {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  border: none;
+  color: white;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 8px rgba(230, 126, 34, 0.3);
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.orderButton:hover {
-  background-color: #e64a19;
+.orderBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.7s ease;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 600px) {
-  .heading {
-    font-size: 1.8rem;
+.orderBtn:hover {
+  background: linear-gradient(135deg, #d35400, #e67e22);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(230, 126, 34, 0.4);
+}
+
+.orderBtn:hover::after {
+  left: 100%;
+}
+
+.viewFullMenuBtn {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: 2px solid #e67e22;
+  color: #e67e22;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  padding: 10px 25px;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.viewFullMenuBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  transition: width 0.4s ease-out;
+  z-index: -1;
+}
+
+.viewFullMenuBtn:hover {
+  color: white;
+  border-color: #d35400;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+}
+
+.viewFullMenuBtn:hover::before {
+  width: 100%;
+}
+
+.sectionTitle {
+  position: relative;
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.sectionTitleDecoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 4px;
+  background: #e67e22;
+  border-radius: 2px;
+  transition: width 0.3s ease-out;
+}
+
+.sectionTitle:hover .sectionTitleDecoration {
+  width: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .menuCardWrapper {
+    width: min(260px, 75vw);
   }
+}
 
-  .subheading {
-    font-size: 1rem;
+@media (max-width: 992px) {
+  .heroSection {
+    padding: 5rem 0;
   }
+  
+  .menuCardWrapper {
+    width: min(240px, 70vw);
+    height: 460px;
+  }
+  
+  .cardImgContainer {
+    height: 180px;
+  }
+}
 
-  .cardImage {
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 4rem 0;
+  }
+  
+  .menuCardWrapper {
+    width: min(220px, 65vw);
+    height: 440px;
+  }
+  
+  .cardImgContainer {
+    height: 160px;
+  }
+  
+  .cardText {
+    -webkit-line-clamp: 2;
+    min-height: 3.2em;
+  }
+}
+
+@media (max-width: 576px) {
+  .heroSection {
+    padding: 3.5rem 1rem;
+  }
+  
+  .menuCardWrapper {
+    width: min(200px, 85vw);
+    height: 420px;
+  }
+  
+  .cardImgContainer {
     height: 150px;
   }
-
-  .cardText {
-    font-size: 0.9rem;
+  
+  .sliderTrack {
+    gap: 15px;
+    padding: 0 15px;
   }
-
-  .orderButton {
-    padding: 8px;
-    font-size: 0.9rem;
+  
+  .cardText {
+    font-size: 0.85rem;
+  }
+  
+  .cardTitle {
+    font-size: 1.3rem;
   }
 }
