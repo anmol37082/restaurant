@@ -124,7 +124,7 @@ const Header = ({ subtitle = '' }) => {
           {/* ✅ Admin in Mobile Menu */}
           <button 
             className={styles.mobileNavButton}
-            onClick={() => handleNavigation('/admin/login')}
+            onClick={() => handleNavigation('/admin')}
           >
             <FaUserShield />
             <span>Admin</span>
