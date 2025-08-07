@@ -71,11 +71,11 @@ const Menu = () => {
               {dishes.map((dish) => (
                 <div key={dish._id} className={styles.menuCard}>
                   <div className={styles.cardImgContainer}>
-                    <img 
-                      src={`${process.env.REACT_APP_API_URL}/uploads/${dish.image}`} 
+                   <img 
+                      src={dish.image} 
                       alt={dish.name}
-                      loading="lazy"
-                    />
+                  />
+
                     <span className={styles.priceBadge}>
                       ₹{dish.price.toLocaleString('en-IN')}
                     </span>
