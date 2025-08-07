@@ -29,6 +29,8 @@ const AddMenu = () => {
     const { name, value, files } = e.target;
     if (name === 'image') {
       setFormData({ ...formData, image: files[0] });
+    } else if (name === 'price') {
+      setFormData({ ...formData, price: value === '' ? '' : Number(value) });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -85,7 +87,7 @@ const AddMenu = () => {
           <div className="col-md-4 mb-3" key={dish._id}>
             <div className="card">
               <img
-                src={`${API_BASE}/uploads/${dish.image}`}
+              src={dish.image}
                 className="card-img-top"
                 alt={dish.name}
                 style={{ height: '200px', objectFit: 'cover' }}
