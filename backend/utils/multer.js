@@ -1,15 +1,16 @@
 const multer = require('multer');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const cloudinary = require('./cloudinary');
+const path = require('path');
 
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'restaurant_dishes', // Folder Cloudinary pe banega
-    allowed_formats: ['jpg', 'png', 'jpeg'],
-  },
-});
+// Memory storage
+const storage = multer.memoryStorage();
 
-const upload = multer({ storage });
+const fileFilter = (req, file, cb) => {
+  const ext = path.extname(file.originalname).toLowerCase();
+  if (ext === '.jpg' || ext === '.jpeg' || ext === '.png') {
+    cb(null, true);
+  } else {
+    cb(new Error('Only images are allowed'), false);
+  }
+};
 
-module.exports = upload;
+module.exports = multer({ storage, fileFilter });
