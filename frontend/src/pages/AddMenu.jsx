@@ -87,7 +87,7 @@ const AddMenu = () => {
           <div className="col-md-4 mb-3" key={dish._id}>
             <div className="card">
               <img
-              src={dish.image}
+                src={`${API_BASE}/uploads/${dish.image}`}
                 className="card-img-top"
                 alt={dish.name}
                 style={{ height: '200px', objectFit: 'cover' }}
