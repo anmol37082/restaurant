@@ -1,30 +1,28 @@
 const express = require('express');
 const multer = require('multer');
 const Dish = require('../models/Dish');
+const { storage } = require('../config/cloudinary');
 const router = express.Router();
-const path = require('path');
 
-// Configure multer storage
-const storage = multer.diskStorage({
-  destination: './uploads',
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // e.g., 162787878.png
-  },
-});
-
+// Configure multer with Cloudinary storage
 const upload = multer({ storage });
 
-// ✅ Add a new dish (POST)
+// ✅ Add a new dish (POST) - with Cloudinary
 router.post('/add', upload.single('image'), async (req, res) => {
   try {
     const { name, price, description } = req.body;
-    const image = req.file?.filename;
+    const image = req.file?.path; // Cloudinary URL
 
     if (!name || !price || !image) {
       return res.status(400).json({ error: 'Name, price, and image are required.' });
     }
 
-    const newDish = new Dish({ name, price, description, image });
+    const newDish = new Dish({ 
+      name, 
+      price, 
+      description, 
+      image 
+    });
     await newDish.save();
 
     res.status(201).json(newDish);
