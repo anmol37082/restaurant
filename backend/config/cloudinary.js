@@ -1,22 +1,16 @@
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-require('dotenv').config();
+ const cloudinary = require('cloudinary').v2;
 
-// Configure Cloudinary
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'your-cloud-name',
-  api_key: process.env.CLOUDINARY_API_KEY || 'your-api-key',
-  api_secret: process.env.CLOUDINARY_API_SECRET || 'your-api-secret'
+  cloud_name: "dxyxvxldl",
+  api_key: "697685844558951",
+  api_secret: "94cJaF3JAA3phkzsylTQTZlOOXs"
 });
 
-// Create Cloudinary storage for multer
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'restaurant-dishes',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-    transformation: [{ width: 500, height: 500, crop: 'limit' }]
+
+cloudinary.api.ping((error, result) => {
+  if (error) {
+    console.error("❌ Cloudinary config error:", error);
+  } else {
+    console.log("✅ Cloudinary connected:", result);
   }
 });
-
-module.exports = { cloudinary, storage };
