@@ -38,6 +38,7 @@ const AddMenu = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const fd = new FormData();
     fd.append('name', formData.name);
     fd.append('price', formData.price);
@@ -45,7 +46,7 @@ const AddMenu = () => {
     fd.append('image', formData.image);
 
     try {
-      await axios.post(`${API_BASE}/api/dishes/add`, fd);
+      await axios.post(`${API_BASE}/api/dishes/add`, fd); // Content-Type auto-set होगा
       setFormData({ name: '', price: '', description: '', image: null });
       fetchDishes();
     } catch (err) {
@@ -87,7 +88,7 @@ const AddMenu = () => {
           <div className="col-md-4 mb-3" key={dish._id}>
             <div className="card">
               <img
-                src={`${API_BASE}/uploads/${dish.image}`}
+                src={dish.image} // ✅ Cloudinary URL directly
                 className="card-img-top"
                 alt={dish.name}
                 style={{ height: '200px', objectFit: 'cover' }}
