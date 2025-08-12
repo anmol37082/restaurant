@@ -4,12 +4,14 @@ const Dish = require('../models/Dish');
 const { storage } = require('../config/cloudinary');
 const router = express.Router();
 
-// Configure multer with Cloudinary storage
 const upload = multer({ storage });
 
-// ✅ Add a new dish (POST) - with Cloudinary
+// ✅ Add a new dish
 router.post('/add', upload.single('image'), async (req, res) => {
   try {
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+
     const { name, price, description } = req.body;
     const image = req.file?.path; // Cloudinary URL
 
@@ -17,21 +19,16 @@ router.post('/add', upload.single('image'), async (req, res) => {
       return res.status(400).json({ error: 'Name, price, and image are required.' });
     }
 
-    const newDish = new Dish({ 
-      name, 
-      price, 
-      description, 
-      image 
-    });
+    const newDish = new Dish({ name, price, description, image });
     await newDish.save();
-
     res.status(201).json(newDish);
   } catch (err) {
+    console.error("Error adding dish:", err);
     res.status(500).json({ message: 'Failed to add dish', error: err.message });
   }
 });
 
-// ✅ Get all dishes (GET)
+// ✅ Get all dishes
 router.get('/', async (req, res) => {
   try {
     const dishes = await Dish.find();
@@ -41,7 +38,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// ✅ Update a dish (PUT)
+// ✅ Update a dish
 router.put('/:id', upload.single('image'), async (req, res) => {
   try {
     const updatedData = {
@@ -49,8 +46,9 @@ router.put('/:id', upload.single('image'), async (req, res) => {
       price: req.body.price,
       description: req.body.description,
     };
+
     if (req.file) {
-      updatedData.image = req.file.filename;
+      updatedData.image = req.file.path; // ✅ Cloudinary URL
     }
 
     const updatedDish = await Dish.findByIdAndUpdate(req.params.id, updatedData, { new: true });
@@ -60,7 +58,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
   }
 });
 
-// ✅ Delete a dish (DELETE)
+// ✅ Delete a dish
 router.delete('/:id', async (req, res) => {
   try {
     await Dish.findByIdAndDelete(req.params.id);
