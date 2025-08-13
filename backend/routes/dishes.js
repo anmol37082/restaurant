@@ -16,6 +16,22 @@ router.use((req, res, next) => {
   next();
 });
 
+// ✅ Get All Dishes Route
+router.get('/', async (req, res) => {
+  try {
+    console.log("📋 Fetching all dishes...");
+    const dishes = await Dish.find().sort({ createdAt: -1 });
+    console.log(`✅ Found ${dishes.length} dishes`);
+    res.status(200).json(dishes);
+  } catch (err) {
+    console.error("❌ Error fetching dishes:", err);
+    res.status(500).json({
+      message: 'Failed to fetch dishes',
+      error: err.message
+    });
+  }
+});
+
 // ✅ Add Dish Route with detailed debugging
 router.post(
   '/add',
@@ -68,6 +84,29 @@ router.post(
     }
   }
 );
+
+// ✅ Delete Dish Route
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(`🗑 Deleting dish with ID: ${id}`);
+    
+    const deletedDish = await Dish.findByIdAndDelete(id);
+    
+    if (!deletedDish) {
+      return res.status(404).json({ message: 'Dish not found' });
+    }
+    
+    console.log("✅ Dish deleted successfully:", deletedDish);
+    res.status(200).json({ message: 'Dish deleted successfully', dish: deletedDish });
+  } catch (err) {
+    console.error("❌ Error deleting dish:", err);
+    res.status(500).json({
+      message: 'Failed to delete dish',
+      error: err.message
+    });
+  }
+});
 
 // ✅ Handle Multer errors explicitly
 router.use((err, req, res, next) => {
