@@ -11,16 +11,36 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/admin/login`, {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      console.log('Attempting login with API URL:', apiUrl);
+      
+      const res = await axios.post(`${apiUrl}/api/admin/login`, {
         email,
         password
       });
+      
+      console.log('Login response:', res.data);
+      
       if (res.data.success) {
         localStorage.setItem('adminToken', res.data.token);
-        navigate('/admin'); // Redirect to admin dashboard
+        navigate('/AdminSidebar'); // Redirect to admin dashboard
       }
     } catch (err) {
-      alert('Login failed. Check credentials.');
+      console.error('Login error:', err);
+      
+      let errorMessage = 'Login failed. ';
+      if (err.response) {
+        // Server responded with error
+        errorMessage += err.response.data.message || 'Server error';
+      } else if (err.request) {
+        // Request was made but no response
+        errorMessage += 'Cannot connect to server. Please check if the server is running.';
+      } else {
+        // Something else happened
+        errorMessage += 'An unexpected error occurred.';
+      }
+      
+      alert(errorMessage);
     }
   };
 

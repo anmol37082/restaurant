@@ -7,6 +7,10 @@ const OrderList = () => {
 
   const API_BASE_URL = process.env.REACT_APP_API_URL;
 
+  if (!API_BASE_URL) {
+    throw new Error("REACT_APP_API_URL environment variable is not set.");
+  }
+
   const fetchOrders = async () => {
     try {
       const res = await axios.get(`${API_BASE_URL}/api/orders`);
