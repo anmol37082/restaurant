@@ -1,4 +1,4 @@
-/* Home.css - Fully Mobile Responsive */
+/* Home.css - Fully Mobile Responsive with Fixed Button Alignment */
 .menuPage {
   min-height: 100vh;
   display: flex;
@@ -55,6 +55,7 @@
   flex-direction: column;
   background: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .cardImgContainer {
@@ -119,9 +120,10 @@
   font-size: 0.85rem;
   width: 100%;
   margin-top: auto;
+  transition: all 0.3s ease;
 }
 
-/* Section Header - Mobile Optimized */
+/* Section Header - Fixed Button Alignment */
 .sectionHeaderContainer {
   width: 100%;
   padding: 0 15px;
@@ -131,6 +133,13 @@
 .sectionHeader {
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+.titleButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .sectionTitle {
@@ -140,6 +149,7 @@
   margin-bottom: 0.5rem;
   position: relative;
   display: inline-block;
+  width: 100%;
 }
 
 .sectionTitleDecoration {
@@ -151,17 +161,22 @@
   background: #e67e22;
 }
 
+/* Fixed View Full Menu Button - Now Properly Right-Aligned */
 .viewFullMenuBtn {
-  align-self: flex-end;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   border: 2px solid #e67e22;
   color: #e67e22;
   padding: 8px 16px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-top: 0.5rem;
   background: transparent;
   border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto; /* This ensures right alignment */
+  margin-top: 0.5rem;
   transition: all 0.3s ease;
+  width: fit-content;
 }
 
 /* Tablet Styles (768px and up) */
@@ -184,7 +199,7 @@
     height: 180px;
   }
   
-  .sectionHeader {
+  .titleButtonWrapper {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -231,13 +246,6 @@
   }
 }
 
-/* Large Desktop Styles (1200px and up) */
-@media (min-width: 1200px) {
-  .menuCardWrapper {
-    width: min(260px, 75vw);
-  }
-}
-
 /* Hover Effects - Desktop Only */
 @media (hover: hover) {
   .menuCard:hover {
@@ -253,5 +261,10 @@
     background: #e67e22;
     color: white;
     transform: translateY(-2px);
+  }
+  
+  .orderBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(230, 126, 34, 0.4);
   }
 }
