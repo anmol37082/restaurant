@@ -58,7 +58,7 @@
   flex-shrink: 0;
   scroll-snap-align: start;
   perspective: 1000px;
-  height: 480px; /* Fixed height for all cards */
+  height: 480px;
 }
 
 .menuCard {
@@ -159,7 +159,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-height: 4.8em; /* 3 lines * 1.6 line-height */
+  min-height: 4.8em;
 }
 
 /* Button Container */
@@ -207,11 +207,18 @@
 }
 
 /* Section Header Styles */
-.sectionHeader {
+.sectionHeaderContainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  width: 100%;
   margin-bottom: 1.5rem;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 15px;
 }
 
@@ -255,8 +262,8 @@
   z-index: 1;
   display: inline-flex;
   align-items: center;
-  margin-top: 0.5rem;
-  align-self: flex-start;
+  margin-left: auto;
+  margin-bottom: 1rem;
 }
 
 .viewFullMenuBtn::before {
@@ -285,14 +292,11 @@
 /* Responsive Adjustments */
 @media (min-width: 768px) {
   .sectionHeader {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-wrap: nowrap;
   }
   
   .viewFullMenuBtn {
-    margin-top: 0;
-    align-self: center;
+    margin-bottom: 0;
   }
 }
 
@@ -371,5 +375,6 @@
   .viewFullMenuBtn {
     padding: 8px 16px;
     font-size: 0.9rem;
+  margin-left: auto;
   }
 }
