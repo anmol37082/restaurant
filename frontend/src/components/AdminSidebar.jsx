@@ -1,54 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import './AdminSidebar.css';
+import styles from './AdminSidebar.module.css';
 
 const AdminSidebar = () => {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
-    navigate('/admin-login'); // Redirect to login page
+    navigate('/admin-login');
+  };
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsOpen(false);
   };
 
   return (
-    <div
-      className="bg-dark text-white d-flex flex-column justify-content-between p-3"
-      style={{ width: '220px', height: '100vh', position: 'fixed' }}
-    >
-      <div>
-        <h4 className="text-center mb-4">🍴 Admin Panel</h4>
-        <ul className="nav flex-column">
-          <li className="nav-item mb-2" key="add-menu">
-            <NavLink
-              to="/admin/add-menu"
-              className={({ isActive }) =>
-                `nav-link ${isActive ? 'active text-warning' : 'text-white'}`
-              }
-            >
-              🍽️ Add Menu
-            </NavLink>
-          </li>
-          <li className="nav-item" key="order-details">
-            <NavLink
-              to="/admin/orders"
-              className={({ isActive }) =>
-                `nav-link ${isActive ? 'active text-warning' : 'text-white'}`
-              }
-            >
-              📦 Order Details
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-
-      <button
-        onClick={handleLogout}
-        className="btn btn-outline-light mt-4"
-        style={{ width: '100%' }}
+    <>
+      <button 
+        className={styles.mobileToggle}
+        onClick={toggleSidebar}
+        aria-label="Toggle menu"
       >
-        🔓 Logout
+        ☰
       </button>
-    </div>
+
+      <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
+        <div className={styles.sidebarContent}>
+          <div className={styles.sidebarHeader}>
+            <h4>🍴 Admin Panel</h4>
+          </div>
+          
+          <ul className={styles.navList}>
+            <li className={styles.navItem}>
+              <NavLink
+                to="/admin/add-menu"
+                className={({ isActive }) =>
+                  `${styles.navLink} ${isActive ? styles.active : ''}`
+                }
+                onClick={closeSidebar}
+              >
+                🍽️ Add Menu
+              </NavLink>
+            </li>
+            <li className={styles.navItem}>
+              <NavLink
+                to="/admin/orders"
+                className={({ isActive }) =>
+                  `${styles.navLink} ${isActive ? styles.active : ''}`
+                }
+                onClick={closeSidebar}
+              >
+                📦 Order Details
+              </NavLink>
+            </li>
+          </ul>
+
+          <button
+            onClick={handleLogout}
+            className={styles.logoutButton}
+          >
+            🔓 Logout
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 
