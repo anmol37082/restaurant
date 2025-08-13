@@ -147,7 +147,7 @@ const Home = () => {
                   <div className="menuCard card h-100 border-0 mx-2">
                     <div className="cardImgContainer" style={{ height: '180px' }}>
                       <img
-                        src={`${API}/uploads/${dish.image}`}
+                      src={dish.image}
                         className="card-img-top"
                         alt={dish.name}
                         loading="lazy"
