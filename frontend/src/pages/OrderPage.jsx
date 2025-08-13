@@ -94,7 +94,7 @@ const OrderPage = () => {
             <div className="card h-100 border-0 shadow" style={{ borderRadius: '15px' }}>
               <div style={{ height: '300px', overflow: 'hidden' }}>
                 <img
-                  src={`${API_BASE_URL}/uploads/${dish.image}`}
+                  src={dish.image}
                   className="card-img-top"
                   alt={dish.name}
                   loading="lazy"
