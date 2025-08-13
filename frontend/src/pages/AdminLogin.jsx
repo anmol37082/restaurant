@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './AdminLogin.module.css'; // Make sure this CSS module exists
-
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,7 +22,7 @@ const AdminLogin = () => {
       
       if (res.data.success) {
         localStorage.setItem('adminToken', res.data.token);
-        navigate('/AdminSidebar'); // Redirect to admin dashboard
+        navigate('/admin'); // Redirect to admin dashboard
       }
     } catch (err) {
       console.error('Login error:', err);
